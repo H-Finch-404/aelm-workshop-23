@@ -19,10 +19,11 @@ jobs:
         go-version: '1.21' # Change to the desired Go version
 
     - name: Build
-      run: go build -C ./workshop-service -o workshop-app ./bin
+      working-directory: workshop-service
+      run: go build -C -o workshop-app
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
         name: workshopapp-artifact
-        path: ./bin/workshop-app # Replace with the path to your built artifact
+        path: workshop-app # Replace with the path to your built artifact
