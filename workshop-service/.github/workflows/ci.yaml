@@ -1,0 +1,28 @@
+name: Go Build and Create Artifacts
+
+on:
+  push:
+    branches:
+      - '*' # Builds on every branch push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: '1.21' # Change to the desired Go version
+
+    - name: Build
+      run: go build -o workshop-app ./bin
+
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: workshopapp-artifact
+        path: ./bin/workshop-app # Replace with the path to your built artifact
